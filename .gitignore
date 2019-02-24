@@ -10,3 +10,6 @@ data_03/
 *.pyc
 __pycache__
 
+
+.ropeproject
+
