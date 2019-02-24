@@ -25,10 +25,28 @@ class GuahaoSpider(scrapy.Spider):
     #  comment_template_url = 'https://www.guahao.com/commentslist/h-{}/1-0?pageNo=1&sign=4C57CE49D28160821F8F746581C5AE62B390D283A43F3CA2C0D00977F19B36DA3998E934AEE1CA2A839CBDA0DAF11EEC889477289C283BDA20C8D75096DB67F8&timestamp=1550890253700'
     comment_template_url = 'https://www.guahao.com/commentslist/h-{}/1-0'
     hospital_ids = [
-        '17634310-b567-4d21-8a02-20dc15e90da5000',
-        #  'dde98fc9-4183-48ee-8c84-453058fa7fe3000',
-        #  '5cee04f9-4cc8-4499-a35b-6f37f2dd8a74000',
-        #  '60cd2663-d69d-4f63-bc17-8618d6e5e609000'
+        #  '17634310-b567-4d21-8a02-20dc15e90da5000',
+        'dde98fc9-4183-48ee-8c84-453058fa7fe3000',
+        '5cee04f9-4cc8-4499-a35b-6f37f2dd8a74000',
+        '60cd2663-d69d-4f63-bc17-8618d6e5e609000',
+        '34250b55-2a8b-474a-95e9-48150516d7a5000',
+        'fb60b555-d22d-4229-b79c-ce9e96c82863000',
+        '5d04ae45-d4f9-42d8-a7f2-8f25897e197d000',
+        'a986c8d76-c720-11e1-913c-5cf9dd2e7135000',
+        '8f113a19-eee7-47b8-9517-2ad069a2f57a000',
+        '448f9a19-8cd2-4ccf-a152-3930ec622d9f000',
+        '986c9800-c720-11e1-913c-5cf9dd2e7135000',
+        '125361059609302000',
+        '9ff45a91-1e70-4fa5-b0af-2cd51d559a91000',
+        '08991199-fee5-48cc-b827-95eb0fdbd980000',
+        '05ba2f6c-ec92-4a58-a6d0-31befb5474ed000',
+        '137228411103168000',
+        '8cda804a-9de1-48cb-b99a-08c0c3e4672d000',
+        '6d71e862-8cbc-4b92-b7de-db272d9e53c3000',
+        '3b79d438-b0c8-436f-8e11-2f3120be91cf000',
+        '9869d542-c720-11e1-913c-5cf9dd2e7135000',
+        'f981627f-aa7e-40a7-9999-895377aa2031000',
+        '73b2d4d7-6604-471a-8f2b-4efe6bb3ce35000'
     ]
 
     min_page = 1  # 21
@@ -215,7 +233,7 @@ class GuahaoSpider(scrapy.Spider):
             except NoSuchElementException as e:
                 break
             next_page.click()
-            time.sleep(0.30)
+            time.sleep(0.35)
             page_no += 1
 
         logging.info('len(items) -----------------> : %d' % len(items))

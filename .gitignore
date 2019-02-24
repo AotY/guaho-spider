@@ -1,6 +1,7 @@
 ### data
-*.txt
+# *.txt
 *.out
+*.log
 data/
 data_01/
 data_02/
