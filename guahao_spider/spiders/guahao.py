@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
-from guahao_spider.items import CommentItem, CommentList
+from guahao_spider.items import CommentItem
 
 
 class GuahaoSpider(scrapy.Spider):
@@ -18,7 +18,7 @@ class GuahaoSpider(scrapy.Spider):
     login_url = 'https://www.guahao.com/user/login'
     #  start_url = 'https://www.guahao.com/hospital/all/%E5%85%A8%E5%9B%BD/all/%E4%B8%8D%E9%99%90/1/all/all/all/0/false/order/p{}'
     #  start_url = 'https://www.guahao.com/hospital/all/%E5%85%A8%E5%9B%BD/all/%E4%B8%8D%E9%99%90/all/all/all/all/0/false/7/p{}'
-    start_url = 'https://www.guahao.com/hospital/all/%E5%85%A8%E5%9B%BD/all/%E4%B8%8D%E9%99%90/p{}'
+    #  start_url = 'https://www.guahao.com/hospital/all/%E5%85%A8%E5%9B%BD/all/%E4%B8%8D%E9%99%90/p{}'
     start_url = 'https://www.guahao.com/hospital/all/%E5%85%A8%E5%9B%BD/all/%E4%B8%8D%E9%99%90/all/33/all/all/0/false/region_sort/p{}'
     #  start_url = 'https://www.guahao.com/hospital/all/%E5%85%A8%E5%9B%BD/all/%E4%B8%8D%E9%99%90/1/all/all/all/0/false/region_sort/p{}'
 
@@ -26,27 +26,50 @@ class GuahaoSpider(scrapy.Spider):
     comment_template_url = 'https://www.guahao.com/commentslist/h-{}/1-0'
     hospital_ids = [
         #  '17634310-b567-4d21-8a02-20dc15e90da5000',
-        'dde98fc9-4183-48ee-8c84-453058fa7fe3000',
-        '5cee04f9-4cc8-4499-a35b-6f37f2dd8a74000',
-        '60cd2663-d69d-4f63-bc17-8618d6e5e609000',
-        '34250b55-2a8b-474a-95e9-48150516d7a5000',
-        'fb60b555-d22d-4229-b79c-ce9e96c82863000',
-        '5d04ae45-d4f9-42d8-a7f2-8f25897e197d000',
-        'a986c8d76-c720-11e1-913c-5cf9dd2e7135000',
-        '8f113a19-eee7-47b8-9517-2ad069a2f57a000',
-        '448f9a19-8cd2-4ccf-a152-3930ec622d9f000',
-        '986c9800-c720-11e1-913c-5cf9dd2e7135000',
-        '125361059609302000',
-        '9ff45a91-1e70-4fa5-b0af-2cd51d559a91000',
+        #  'dde98fc9-4183-48ee-8c84-453058fa7fe3000',
+        #  '5cee04f9-4cc8-4499-a35b-6f37f2dd8a74000',
+        #  '60cd2663-d69d-4f63-bc17-8618d6e5e609000',
+        #  '34250b55-2a8b-474a-95e9-48150516d7a5000',
+        #  'fb60b555-d22d-4229-b79c-ce9e96c82863000',
+        #  '5d04ae45-d4f9-42d8-a7f2-8f25897e197d000',
+        #  'a986c8d76-c720-11e1-913c-5cf9dd2e7135000',
+        #  '8f113a19-eee7-47b8-9517-2ad069a2f57a000',
+        #  '448f9a19-8cd2-4ccf-a152-3930ec622d9f000',
+        #  '986c9800-c720-11e1-913c-5cf9dd2e7135000',
+        #  '125361059609302000',
+        #  '9ff45a91-1e70-4fa5-b0af-2cd51d559a91000',
+        #  '08991199-fee5-48cc-b827-95eb0fdbd980000',
+        #  '05ba2f6c-ec92-4a58-a6d0-31befb5474ed000',
+        #  '137228411103168000',
+        #  '8cda804a-9de1-48cb-b99a-08c0c3e4672d000',
+        #  '6d71e862-8cbc-4b92-b7de-db272d9e53c3000',
+        #  '3b79d438-b0c8-436f-8e11-2f3120be91cf000',
+        #  '9869d542-c720-11e1-913c-5cf9dd2e7135000',
+        #  'f981627f-aa7e-40a7-9999-895377aa2031000',
+        #  '73b2d4d7-6604-471a-8f2b-4efe6bb3ce35000',
+        '253aa3fe-45ea-45e0-976b-c49ee58b92fb000',
+        '125336754304601000',
+        '128229647014009000',
+        'eba8a3ab-dcde-4538-9a7e-05c55732b5f8000',
+        '125336131920301000',
+        'ce1fa639-29f5-4443-a76c-2006e445206e000',
+        'a37ef412-f31e-421d-a291-2521ea6f74d8000',
+        'BF314EAD23323ED3E040007F01004B66000',
+        '4ed5457b-721f-4d81-bcf6-b018234886b2000',
+        '70e69226-fcde-4c4b-9e0b-05802890863c000',
         '08991199-fee5-48cc-b827-95eb0fdbd980000',
-        '05ba2f6c-ec92-4a58-a6d0-31befb5474ed000',
-        '137228411103168000',
-        '8cda804a-9de1-48cb-b99a-08c0c3e4672d000',
+        '1ee21b16-9630-4e97-b4d6-daa6218b4c98000',
+        '138872494057004000',
+        '8888a69d-5648-4710-99dd-92ee5e2ef1fe000',
         '6d71e862-8cbc-4b92-b7de-db272d9e53c3000',
-        '3b79d438-b0c8-436f-8e11-2f3120be91cf000',
-        '9869d542-c720-11e1-913c-5cf9dd2e7135000',
-        'f981627f-aa7e-40a7-9999-895377aa2031000',
-        '73b2d4d7-6604-471a-8f2b-4efe6bb3ce35000'
+        '136400854463027000',
+        'DC2F8A126980DCE4E040A8C00F012A34000',
+        'd4b40a10-5f19-458a-b5e4-8273597be106000',
+        '64f9440a-dda7-4219-af06-cad2815359c2000',
+        'a8d8d82e-7b49-496c-8dd7-fe8989d79bb4000',
+        'c1623fc3-1926-44df-9de4-1562c162add9000',
+        'f226027e-7533-4834-b790-40f205e42ad5000',
+        '141135273808672000'
     ]
 
     min_page = 1  # 21
@@ -74,7 +97,8 @@ class GuahaoSpider(scrapy.Spider):
             EC.presence_of_element_located((By.ID, "gh"))
         )
         for hospital_id in self.hospital_ids:
-            hospital_comment_url = self.comment_template_url.format(hospital_id)
+            hospital_comment_url = self.comment_template_url.format(
+                hospital_id)
             yield scrapy.Request(hospital_comment_url, cookies=self.driver.get_cookies(), callback=self.parse_comment)
 
         """
@@ -151,22 +175,26 @@ class GuahaoSpider(scrapy.Spider):
         except NoSuchElementException as e:
             return None
 
-        page_no = 1
         items = list()
 
-        hospital_name = str(self.driver.find_element_by_xpath('//h1/strong/a').text)
+        hospital_name = str(
+            self.driver.find_element_by_xpath('//h1/strong/a').text)
 
-        hospital_grade = str(self.driver.find_element_by_xpath('//h1/span').text)
-        hospital_grade = hospital_grade.replace('\n', '').replace('\t', '').replace(' ', '')
+        hospital_grade = str(
+            self.driver.find_element_by_xpath('//h1/span').text)
+        hospital_grade = hospital_grade.replace(
+            '\n', '').replace('\t', '').replace(' ', '')
 
         #  if hospital_name in self.hospital_set:
-            #  return None
+        #  return None
 
         #  self.hospital_set.add(hospital_name)
 
-        while next_page is not None and page_no <= 3000:
-            logging.info('current url -----------------> : %s' % self.driver.current_url)
-            comment_lis = self.driver.find_elements_by_xpath('//ul[@id="comment-list"]/li')
+        while next_page is not None:
+            logging.info('current url -----------------> : %s' %
+                         self.driver.current_url)
+            comment_lis = self.driver.find_elements_by_xpath(
+                '//ul[@id="comment-list"]/li')
             for comment_li in comment_lis:
                 try:
                     item = CommentItem()
@@ -178,18 +206,22 @@ class GuahaoSpider(scrapy.Spider):
 
                     # disease name
                     try:
-                        disease = str(row1_ps[0].find_element_by_xpath('.//span').text)
-                        disease = disease.replace('\n', '').replace('\t', '').replace(' ', '')
+                        disease = str(
+                            row1_ps[0].find_element_by_xpath('.//span').text)
+                        disease = disease.replace('\n', '').replace(
+                            '\t', '').replace(' ', '')
                     except NoSuchElementException as e:
                         disease = '无'
                         logging.info(e)
                     #  logging.info('disease -----------------> : %s' % disease)
 
                     # score
-                    score = str(len(row1_ps[1].find_elements_by_xpath('.//span[contains(@class, "giS-star-0")]')))
+                    score = str(len(row1_ps[1].find_elements_by_xpath(
+                        './/span[contains(@class, "giS-star-0")]')))
                     #  logging.info('score -----------------> : %s' % score)
 
-                    row2_divs = comment_li.find_elements_by_xpath('.//div[@class="row-2"]/div')
+                    row2_divs = comment_li.find_elements_by_xpath(
+                        './/div[@class="row-2"]/div')
 
                     # comment text
                     try:
@@ -207,7 +239,8 @@ class GuahaoSpider(scrapy.Spider):
 
                     # doctor
                     try:
-                        doctor = row2_divs[1].find_element_by_xpath('.//p/span[2]/a')
+                        doctor = row2_divs[1].find_element_by_xpath(
+                            './/p/span[2]/a')
                         doctor = str(doctor.text)
                     except NoSuchElementException as e:
                         doctor = '佚名'
@@ -224,7 +257,8 @@ class GuahaoSpider(scrapy.Spider):
 
                     items.append(item)
                 except Exception as e:
-                    logging.info('item error -----------------------> {}'.format(e))
+                    logging.info(
+                        'item error -----------------------> {}'.format(e))
                     logging.info('item: {}'.format(item))
                     continue
             try:
@@ -234,7 +268,6 @@ class GuahaoSpider(scrapy.Spider):
                 break
             next_page.click()
             time.sleep(0.35)
-            page_no += 1
 
         logging.info('len(items) -----------------> : %d' % len(items))
         for item in items:
