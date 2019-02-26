@@ -26,8 +26,8 @@ class GuahaoSpider(scrapy.Spider):
     comment_template_url = 'https://www.guahao.com/commentslist/h-{}/1-0'
     hospital_ids = [
         #  '17634310-b567-4d21-8a02-20dc15e90da5000',
-        #  'dde98fc9-4183-48ee-8c84-453058fa7fe3000',
-        #  '5cee04f9-4cc8-4499-a35b-6f37f2dd8a74000',
+        'dde98fc9-4183-48ee-8c84-453058fa7fe3000',
+        '5cee04f9-4cc8-4499-a35b-6f37f2dd8a74000',
         #  '60cd2663-d69d-4f63-bc17-8618d6e5e609000',
         #  '34250b55-2a8b-474a-95e9-48150516d7a5000',
         #  'fb60b555-d22d-4229-b79c-ce9e96c82863000',
@@ -252,86 +252,166 @@ class GuahaoSpider(scrapy.Spider):
         #  '7343d4ce-c876-4d31-80eb-3691c6aaaf9c000',
         #  '3d30af33-3c9c-43c3-b136-9152e8ece1f4000',
         #  'cf460b90-30e0-4894-8dfc-1f6d1cf6b36d000',  # p27
-        '141647084028526000',
-        'ac739332-eaaa-469a-9c67-04fa0b684ad9000',
-        '902df64d-b0d3-4a88-a229-eb015c5c0f41000',
-        '137228411107576000',
-        'fadbc010-ed25-4e20-8580-0199e87e95be000',
-        '139591057953884000',
-        'd1dcf605-f86a-4f2c-a554-58cc3bd292c2000',
-        '986acb11-c720-11e1-913c-5cf9dd2e7135000',
-        'fa3134ba-a02c-4035-8103-34f8b119c643000',
-        '08C006A09457FA88E0500A0AC8641E3E000',
-        '9a9a16cd-c720-11e1-913c-5cf9dd2e7135000',
-        '19cdd4f7-3bf2-447a-b337-c5b737fde0c5000',
-        'bddce032-c9fa-49f3-b0f8-50e81aff1c6a000',
-        'edce8488-b52e-4389-a6e7-856d19f8b44b000',
-        '140963940432110000',
-        'ca4317bc-4274-4b5c-91bb-447e743d4956000',
-        '3a4cd718-8744-4293-959d-f2c3942afe25000',
-        '897232f5-0be4-4914-9f9b-40b2641fb2d8000',
-        '11181afd-e048-4963-a2f7-64747e05e651000',
-        '986b10c4-c720-11e1-913c-5cf9dd2e7135000',
-        '2a5f0396-505f-4b03-bf41-14e1d54e4f04000',
-        '9867423d-c720-11e1-913c-5cf9dd2e7135000',
-        '138871376955754000',
-        'd693fdaa-1e6b-4a8c-a8c1-aab7a2468347000',
-        '8998f924-d633-495c-8f7a-eaea0dfee1d4000',
-        '821f1264-907c-4e13-b772-f3403a149436000',
-        '98684eaf-c720-11e1-913c-5cf9dd2e7135000',
-        '86484bde-21d4-4ad2-a72b-27119250a840000',
-        '986b58f8-c720-11e1-913c-5cf9dd2e7135000',
-        '137905381139593000',
-        'b54f9d4b-eed7-4d82-96c1-0f7893a6ffba000',
-        'bfc116f1-437a-4557-98bc-392f72c7dcae000',
-        '9869d7a5-c720-11e1-913c-5cf9dd2e7135000',
-        '9867ce50-c720-11e1-913c-5cf9dd2e7135000',
-        '17d8d2e1-8f29-42e2-826b-0f76e7806fd7000',
-        '9fcc0c65-d1a8-4e8e-a0f4-68c2dac49bfa000',
-        'FEC007C4E9DA1EF0E040A8C00F012C86000',
-        'f1bb6f71-a795-415a-ba5b-5cf977e8028a000',
-        'CDE27F434D83C329E040A8C079023B55000',
-        '1c17553f-1245-44bf-846e-a2b23969c7ac000',
-        '138681919758805000',
-        'a71cc150-a679-4df8-893c-3a4baa7f2f3e000',
-        '6154afee-a134-495b-809b-0d5249471260000',
-        '9867e2b5-c720-11e1-913c-5cf9dd2e7135000',
-        '9a8a326e-c720-11e1-913c-5cf9dd2e7135000',
-        'd12ffdae-1dae-41e4-8455-8e0226533e7a000',
-        'a58f12b9-6c9e-4cdf-a818-7cf48e708ec6000',
-        'e1362c5f-e266-4126-92c7-4cd26a7cf1ad000',
-        '6f078400-9510-49a5-abf8-c6390c37aadd000',
-        '9a99af1a-c720-11e1-913c-5cf9dd2e7135000',
-        'a0632bb9-b2ff-4987-8373-0cdef468f6e7000',
-        '141647113515718000',
-        '70167259-006f-43b0-ae7c-b93703fa77e7000',
-        '9868c72e-c720-11e1-913c-5cf9dd2e7135000',
-        '986d6720-c720-11e1-913c-5cf9dd2e7135000',
-        '8efb333b-91ac-48fa-b4a2-3e6985023537000',
-        '61f778a6-6f37-4fe2-b7d0-20fb1870bcbf000',
-        '3b3121de-9265-4f34-9746-bab96806c880000',
-        '633686f2-0763-4247-94e4-33ecc9e89d4f000',
-        '986c3710-c720-11e1-913c-5cf9dd2e7135000',
-        '986d3089-c720-11e1-913c-5cf9dd2e7135000',
-        '4cb5d020-bf13-47b7-b0b1-e5a26a48bc5d000',
-        '8d7665a0-ad57-4114-aa4d-09aa3bd20078000',
-        '138623336233807000',
-        'ED25EA3F3F5BA102E040A8C00F01221B000',
-        '9869b07f-c720-11e1-913c-5cf9dd2e7135000',
-        'f427b6aa-aec3-443d-9865-8b7a65e77298000',
-        '140074969728830000',
-        '2da7cf44-4969-4fde-a7b9-3500263e5743000',
-        '137228411108482000',
-        '986b2106-c720-11e1-913c-5cf9dd2e7135000',
-        'f4dcf770-acb0-40c9-979b-97c141f3ccef000',
-        '08a48932-bf29-4cc7-bc57-7e7e58f6f6a5000',
-        'f9f0e8ab-0b39-43d4-8f26-0b7ba0a7ae15000',
-        '8e48f4bf-bc26-40bb-a7c2-e7e566a48233000',
-        '139400118051740000',
-        '98674a8b-c720-11e1-913c-5cf9dd2e7135000',
-        '9a505d07-4516-46c6-8bea-de3ced809d3e000',
-        '986ba7bd-c720-11e1-913c-5cf9dd2e7135000',
-        'e67ebf30-88b8-4a57-8d63-3b790ef999f1000'  # p35
+        #  '141647084028526000',
+        #  'ac739332-eaaa-469a-9c67-04fa0b684ad9000',
+        #  '902df64d-b0d3-4a88-a229-eb015c5c0f41000',
+        #  '137228411107576000',
+        #  'fadbc010-ed25-4e20-8580-0199e87e95be000',
+        #  '139591057953884000',
+        #  'd1dcf605-f86a-4f2c-a554-58cc3bd292c2000',
+        #  '986acb11-c720-11e1-913c-5cf9dd2e7135000',
+        #  'fa3134ba-a02c-4035-8103-34f8b119c643000',
+        #  '08C006A09457FA88E0500A0AC8641E3E000',
+        #  '9a9a16cd-c720-11e1-913c-5cf9dd2e7135000',
+        #  '19cdd4f7-3bf2-447a-b337-c5b737fde0c5000',
+        #  'bddce032-c9fa-49f3-b0f8-50e81aff1c6a000',
+        #  'edce8488-b52e-4389-a6e7-856d19f8b44b000',
+        #  '140963940432110000',
+        #  'ca4317bc-4274-4b5c-91bb-447e743d4956000',
+        #  '3a4cd718-8744-4293-959d-f2c3942afe25000',
+        #  '897232f5-0be4-4914-9f9b-40b2641fb2d8000',
+        #  '11181afd-e048-4963-a2f7-64747e05e651000',
+        #  '986b10c4-c720-11e1-913c-5cf9dd2e7135000',
+        #  '2a5f0396-505f-4b03-bf41-14e1d54e4f04000',
+        #  '9867423d-c720-11e1-913c-5cf9dd2e7135000',
+        #  '138871376955754000',
+        #  'd693fdaa-1e6b-4a8c-a8c1-aab7a2468347000',
+        #  '8998f924-d633-495c-8f7a-eaea0dfee1d4000',
+        #  '821f1264-907c-4e13-b772-f3403a149436000',
+        #  '98684eaf-c720-11e1-913c-5cf9dd2e7135000',
+        #  '86484bde-21d4-4ad2-a72b-27119250a840000',
+        #  '986b58f8-c720-11e1-913c-5cf9dd2e7135000',
+        #  '137905381139593000',
+        #  'b54f9d4b-eed7-4d82-96c1-0f7893a6ffba000',
+        #  'bfc116f1-437a-4557-98bc-392f72c7dcae000',
+        #  '9869d7a5-c720-11e1-913c-5cf9dd2e7135000',
+        #  '9867ce50-c720-11e1-913c-5cf9dd2e7135000',
+        #  '17d8d2e1-8f29-42e2-826b-0f76e7806fd7000',
+        #  '9fcc0c65-d1a8-4e8e-a0f4-68c2dac49bfa000',
+        #  'FEC007C4E9DA1EF0E040A8C00F012C86000',
+        #  'f1bb6f71-a795-415a-ba5b-5cf977e8028a000',
+        #  'CDE27F434D83C329E040A8C079023B55000',
+        #  '1c17553f-1245-44bf-846e-a2b23969c7ac000',
+        #  '138681919758805000',
+        #  'a71cc150-a679-4df8-893c-3a4baa7f2f3e000',
+        #  '6154afee-a134-495b-809b-0d5249471260000',
+        #  '9867e2b5-c720-11e1-913c-5cf9dd2e7135000',
+        #  '9a8a326e-c720-11e1-913c-5cf9dd2e7135000',
+        #  'd12ffdae-1dae-41e4-8455-8e0226533e7a000',
+        #  'a58f12b9-6c9e-4cdf-a818-7cf48e708ec6000',
+        #  'e1362c5f-e266-4126-92c7-4cd26a7cf1ad000',
+        #  '6f078400-9510-49a5-abf8-c6390c37aadd000',
+        #  '9a99af1a-c720-11e1-913c-5cf9dd2e7135000',
+        #  'a0632bb9-b2ff-4987-8373-0cdef468f6e7000',
+        #  '141647113515718000',
+        #  '70167259-006f-43b0-ae7c-b93703fa77e7000',
+        #  '9868c72e-c720-11e1-913c-5cf9dd2e7135000',
+        #  '986d6720-c720-11e1-913c-5cf9dd2e7135000',
+        #  '8efb333b-91ac-48fa-b4a2-3e6985023537000',
+        #  '61f778a6-6f37-4fe2-b7d0-20fb1870bcbf000',
+        #  '3b3121de-9265-4f34-9746-bab96806c880000',
+        #  '633686f2-0763-4247-94e4-33ecc9e89d4f000',
+        #  '986c3710-c720-11e1-913c-5cf9dd2e7135000',
+        #  '986d3089-c720-11e1-913c-5cf9dd2e7135000',
+        #  '4cb5d020-bf13-47b7-b0b1-e5a26a48bc5d000',
+        #  '8d7665a0-ad57-4114-aa4d-09aa3bd20078000',
+        #  '138623336233807000',
+        #  'ED25EA3F3F5BA102E040A8C00F01221B000',
+        #  '9869b07f-c720-11e1-913c-5cf9dd2e7135000',
+        #  'f427b6aa-aec3-443d-9865-8b7a65e77298000',
+        #  '140074969728830000',
+        #  '2da7cf44-4969-4fde-a7b9-3500263e5743000',
+        #  '137228411108482000',
+        #  '986b2106-c720-11e1-913c-5cf9dd2e7135000',
+        #  'f4dcf770-acb0-40c9-979b-97c141f3ccef000',
+        #  '08a48932-bf29-4cc7-bc57-7e7e58f6f6a5000',
+        #  'f9f0e8ab-0b39-43d4-8f26-0b7ba0a7ae15000',
+        #  '8e48f4bf-bc26-40bb-a7c2-e7e566a48233000',
+        #  '139400118051740000',
+        #  '98674a8b-c720-11e1-913c-5cf9dd2e7135000',
+        #  '9a505d07-4516-46c6-8bea-de3ced809d3e000',
+        #  '986ba7bd-c720-11e1-913c-5cf9dd2e7135000',
+        #  'e67ebf30-88b8-4a57-8d63-3b790ef999f1000',  # p35
+        '36189D9C2965454F8C24B71E6A5BBC5F000',
+        '137905381139091000',
+        'cbb10df2-ae84-44d8-8b92-0d5f439636d6000',
+        'b9b7dde3-9fa3-4452-95bd-87453c931a7d000',
+        '233b70e3-78b3-4eba-b770-98f41aa1eede000',
+        '25e74836-1225-4705-bd7c-91b5f4e238aa000',
+        'BF42114847F803BDE040007F01006031000',
+        '24a00b5b-fc08-45ba-876a-1f714b5a34d5000',
+        '98685546-c720-11e1-913c-5cf9dd2e7135000',
+        '986c33dc-c720-11e1-913c-5cf9dd2e7135000',
+        '879765ed-757c-40bd-a5ad-a44e07f60c56000',
+        '9a998176-c720-11e1-913c-5cf9dd2e7135000',
+        'BF429DB0519CCC22E040007F010012AE000',
+        'b7b117e3-2b6f-4125-b289-f08d698cc4c9000',
+        '986957b0-c720-11e1-913c-5cf9dd2e7135000',
+        '560aafc4-41a4-4b2f-bb58-426168f63d32000',
+        '4e195d5e-e354-47bf-bd64-fd3ee107c3a8000',
+        '98682e12-c720-11e1-913c-5cf9dd2e7135000',
+        '9869ff92-c720-11e1-913c-5cf9dd2e7135000',
+        '986c4156-c720-11e1-913c-5cf9dd2e7135000',
+        'd607e085-72a5-4fa1-af68-2f1767d6d47f000',
+        'BF429DB051BFCC22E040007F010012AE000',
+        'EBC03AF758A9AEABE0400A0AC8647824000',
+        'BF42114847F503BDE040007F01006031000',
+        '986d6f0d-c720-11e1-913c-5cf9dd2e7135000',
+        '9a99881c-c720-11e1-913c-5cf9dd2e7135000',
+        '66fdb685-648f-4071-84d4-654282cfb35a000',
+        '8200f2a5-e933-4a31-929a-f0ea8c2dcf9a000',
+        '986a88e9-c720-11e1-913c-5cf9dd2e7135000',
+        'fe54ca19-39c7-403b-baae-ce55d34e2e5d000',
+        'EDB440F6810D5790E0400A0AC86438BF000',
+        'a7463b63-0f44-4b7b-bae2-d0a36ec5e40f000',
+        'af8ad711-1cab-48d5-a4d4-e92d387cf825000',
+        '986d6e05-c720-11e1-913c-5cf9dd2e7135000',
+        '3203aee3-c9a9-4b5e-a71e-c40fd787a63f000',
+        '67a85484-b12c-4283-9e4a-a432b447d25b000',
+        '2f5c017c-3877-471b-83f4-eda43fc2542c000',
+        '9868c6a5-c720-11e1-913c-5cf9dd2e7135000',
+        'a0acb0fc-f0f0-4132-b905-33268abfde47000',
+        'e0446d33-516f-438a-a78b-bb824a4bdba2000',
+        'a0d6093c-d8e3-4bf1-b990-09b304c93085000',
+        '9a92ab9e-c720-11e1-913c-5cf9dd2e7135000',
+        '8c0224d8-c804-496d-b04c-87d1e0f54e5c000',
+        '83017cc6-f325-4b22-9a18-4ecf2b62170b000',
+        '98686e55-c720-11e1-913c-5cf9dd2e7135000',
+        'c239960f-2883-4d40-a3a8-9a4edbd5af26000',
+        '9a912d15-c720-11e1-913c-5cf9dd2e7135000',
+        '986782a5-c720-11e1-913c-5cf9dd2e7135000',
+        'ecce0df7-c7b3-4135-bc65-5ec1bcdb3142000',
+        '138871194479745000',
+        '138683098076697000',
+        '3e250c80-e1ea-422a-add1-9518d7176abf000',
+        '4d7c5556-70d6-41b4-abbb-90a4f95892d1000',
+        'ae0ebf49-6d1d-440d-a9de-aa69cb6da053000',
+        '137228411109488000',
+        '8b9ecbce-844f-46f8-86df-d89e9a2da070000',
+        'f4bbc423-e52c-4ac0-be01-ccb22626802d000',
+        'acd88f81-36c6-4f0e-8155-150b16244f61000',
+        '75bbf1b6-6a32-40b5-8ce1-b89019127e15000',
+        '9868c381-c720-11e1-913c-5cf9dd2e7135000',
+        '5cc9205b-f6e5-4f99-9bbd-a12bb47715da000',
+        'ae95f714-27ef-449a-8787-62086e8f99a9000',
+        'd7916af3-e2b4-4573-89fc-de6a918c8d35000',
+        '6f339869-be60-42ff-9766-29522ba81739000',
+        '05010a0e-d110-4720-9d7e-d9bdd8c5d261000',
+        '02a29335-dca2-48ee-ac08-9234ef824784000',
+        '986c4660-c720-11e1-913c-5cf9dd2e7135000',
+        '0a77e58f-6282-4421-88bf-1a0f383b6034000',
+        '04eae929-4174-481c-8e15-3a4cd946c7f5000',
+        '9a911135-c720-11e1-913c-5cf9dd2e7135000',
+        '986d8c7d-c720-11e1-913c-5cf9dd2e7135000',
+        '9869d4ae-c720-11e1-913c-5cf9dd2e7135000',
+        '9869dfc9-c720-11e1-913c-5cf9dd2e7135000',
+        'FF0153A8EB462010E0430F01A8C07495000',
+        'f9d96eca-1a13-41b7-8431-397aa3c9a6ce000',
+        '17c711b9-b61b-4ac3-af3a-1d9bdb43ab2f000',
+        'aa8b36f4-458f-4c04-aff2-a32998b86bae000',
+        'e38d7128-905b-42e4-aaa4-22f9e5800579000',
+        '142129333351967000',
+        '986bcc04-c720-11e1-913c-5cf9dd2e7135000'  # p43
 
     ]
 
@@ -428,115 +508,106 @@ class GuahaoSpider(scrapy.Spider):
     def parse_comment(self, response):
         #  if response.url.find('commentslist') == -1:
             #  yield scrapy.Request(url=response.url, cookies=self.driver.get_cookies(), callback=self.parse)
-        logging.info('parse_comment-----------> url: %s, code: %s' %
-                     (response.url, response.status))
+        logging.info('parse_comment-----------> url: %s, code: %s' % (response.url, response.status))
         # selenium get
         self.driver.get(response.url)
         try:
-            next_page = self.driver.find_element_by_xpath(
-                '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
+            next_page = self.driver.find_element_by_xpath('//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
         except NoSuchElementException as e:
-            return None
+            next_page = None
 
         items = list()
 
-        hospital_name = str(
-            self.driver.find_element_by_xpath('//h1/strong/a').text)
+        try:
+            hospital_name = str(self.driver.find_element_by_xpath('//h1/strong/a').text)
 
-        hospital_grade = str(
-            self.driver.find_element_by_xpath('//h1/span').text)
-        hospital_grade = hospital_grade.replace(
-            '\n', '').replace('\t', '').replace(' ', '')
-
-        #  if hospital_name in self.hospital_set:
-        #  return None
-
-        #  self.hospital_set.add(hospital_name)
+            hospital_grade = str(self.driver.find_element_by_xpath('//h1/span').text)
+            hospital_grade = hospital_grade.replace(
+                '\n', '').replace('\t', '').replace(' ', '')
+        except Exception as e:
+            hospital_name = '无'
+            hospital_grade = '无'
 
         while next_page is not None:
-            logging.info('current url -----------------> : %s' %
-                         self.driver.current_url)
-            comment_lis = self.driver.find_elements_by_xpath(
-                '//ul[@id="comment-list"]/li')
-            for comment_li in comment_lis:
-                try:
-                    item = CommentItem()
-
-                    row1_ps = comment_li.find_elements_by_xpath(
-                        './/div[@class="row-1"]/p')
-                    #  logging.info('len(row1_ps) -----------------> : %s' %
-                    #  len(row1_ps))
-
-                    # disease name
-                    try:
-                        disease = str(
-                            row1_ps[0].find_element_by_xpath('.//span').text)
-                        disease = disease.replace('\n', '').replace(
-                            '\t', '').replace(' ', '')
-                    except NoSuchElementException as e:
-                        disease = '无'
-                        logging.info(e)
-                    #  logging.info('disease -----------------> : %s' % disease)
-
-                    # score
-                    score = str(len(row1_ps[1].find_elements_by_xpath(
-                        './/span[contains(@class, "giS-star-0")]')))
-                    #  logging.info('score -----------------> : %s' % score)
-
-                    row2_divs = comment_li.find_elements_by_xpath(
-                        './/div[@class="row-2"]/div')
-
-                    # comment text
-                    try:
-                        text = row2_divs[0].find_element_by_xpath(
-                            './/span[@class="detail"]')
-                    except NoSuchElementException as e:
-                        text = row2_divs[0].find_element_by_xpath(
-                            './/span[@class="summary"]')
-                    text = str(text.text)
-                    #  logging.info('text -----------------> : %s' % text)
-
-                    # comment date
-                    date = row2_divs[1].find_element_by_xpath('.//p/span[1]')
-                    date = str(date.text.split()[-1][1:-1])
-
-                    # doctor
-                    try:
-                        doctor = row2_divs[1].find_element_by_xpath(
-                            './/p/span[2]/a')
-                        doctor = str(doctor.text)
-                    except NoSuchElementException as e:
-                        doctor = '佚名'
-                    #  logging.info('doctor -----------------> : %s' % doctor)
-
-                    item['hospital_name'] = hospital_name
-                    item['hospital_grade'] = hospital_grade
-
-                    item['disease'] = disease
-                    item['text'] = text
-                    item['score'] = score
-                    item['date'] = date
-                    item['doctor'] = doctor
-
-                    items.append(item)
-                except Exception as e:
-                    logging.info(
-                        'item error -----------------------> {}'.format(e))
-                    logging.info('item: {}'.format(item))
-                    continue
             try:
-                next_page = self.driver.find_element_by_xpath(
-                    '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
-            except NoSuchElementException as e:
-                break
-            next_page.click()
-            time.sleep(0.35)
+                logging.info('current url -----------------> : %s' % self.driver.current_url)
+                comment_lis = self.driver.find_elements_by_xpath('//ul[@id="comment-list"]/li')
+                for comment_li in comment_lis:
+                    try:
+                        item = CommentItem()
+
+                        row1_ps = comment_li.find_elements_by_xpath('.//div[@class="row-1"]/p')
+                        #  logging.info('len(row1_ps) -----------------> : %s' %
+
+                        # disease name
+                        try:
+                            disease = str(
+                                row1_ps[0].find_element_by_xpath('.//span').text)
+                            disease = disease.replace('\n', '').replace(
+                                '\t', '').replace(' ', '')
+                        except NoSuchElementException as e:
+                            disease = '无'
+                            logging.info(e)
+                        #  logging.info('disease -----------------> : %s' % disease)
+
+                        # score
+                        score = str(len(row1_ps[1].find_elements_by_xpath(
+                            './/span[contains(@class, "giS-star-0")]')))
+                        #  logging.info('score -----------------> : %s' % score)
+
+                        row2_divs = comment_li.find_elements_by_xpath(
+                            './/div[@class="row-2"]/div')
+
+                        # comment text
+                        try:
+                            text = row2_divs[0].find_element_by_xpath('.//span[@class="detail"]')
+                        except NoSuchElementException as e:
+                            text = row2_divs[0].find_element_by_xpath('.//span[@class="summary"]')
+                        text = str(text.text)
+                        #  logging.info('text -----------------> : %s' % text)
+
+                        # comment date
+                        date = row2_divs[1].find_element_by_xpath('.//p/span[1]')
+                        date = str(date.text.split()[-1][1:-1])
+
+                        # doctor
+                        try:
+                            doctor = row2_divs[1].find_element_by_xpath(
+                                './/p/span[2]/a')
+                            doctor = str(doctor.text)
+                        except NoSuchElementException as e:
+                            doctor = '佚名'
+                        #  logging.info('doctor -----------------> : %s' % doctor)
+
+                        item['hospital_name'] = hospital_name
+                        item['hospital_grade'] = hospital_grade
+
+                        item['disease'] = disease
+                        item['text'] = text
+                        item['score'] = score
+                        item['date'] = date
+                        item['doctor'] = doctor
+
+                        items.append(item)
+                    except Exception as e:
+                        logging.info(
+                            'item error -----------------------> {}'.format(e))
+                        logging.info('item: {}'.format(item))
+                        continue
+                try:
+                    next_page = self.driver.find_element_by_xpath('//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
+                except NoSuchElementException as e:
+                    next_page = None
+
+                next_page.click()
+                time.sleep(0.30)
+            except Exception as e:
+                logging.info('next page error -------------------> {}'.format(e))
+                continue
 
         logging.info('len(items) -----------------> : %d' % len(items))
         for item in items:
             yield item
-
-        #  return None
 
         """
         hospital_name = response.xpath('//h1/strong/a/text()').extract_first()
