@@ -37,7 +37,6 @@ class GuahaoSpider(scrapy.Spider):
     def start_requests(self):
         logging.info('start_request.............')
         """This function is called before crawling starts."""
-
         #  yield SeleniumRequest(
         #  url=self.login_url,
         #  callback=self.start_crawl,
@@ -118,20 +117,22 @@ class GuahaoSpider(scrapy.Spider):
     def parse_comment(self, response):
         #  if response.url.find('commentslist') == -1:
             #  yield scrapy.Request(url=response.url, cookies=self.driver.get_cookies(), callback=self.parse)
-        logging.info('parse_comment-----------> url: %s, code: %s' % (response.url, response.status))
+        logging.info('parse_comment-----------> url: %s, code: %s' %
+                     (response.url, response.status))
         # selenium get
         self.driver.get(response.url)
         try:
-            next_page = self.driver.find_element_by_xpath('//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
+            next_page = self.driver.find_element_by_xpath(
+                '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
         except NoSuchElementException as e:
             next_page = None
 
         items = list()
-
         try:
-            hospital_name = str(self.driver.find_element_by_xpath('//h1/strong/a').text)
-
-            hospital_grade = str(self.driver.find_element_by_xpath('//h1/span').text)
+            hospital_name = str(
+                self.driver.find_element_by_xpath('//h1/strong/a').text)
+            hospital_grade = str(
+                self.driver.find_element_by_xpath('//h1/span').text)
             hospital_grade = hospital_grade.replace(
                 '\n', '').replace('\t', '').replace(' ', '')
         except Exception as e:
@@ -140,20 +141,24 @@ class GuahaoSpider(scrapy.Spider):
 
         while next_page is not None:
             try:
-                logging.info('current url -----------------> : %s' % self.driver.current_url)
-                comment_lis = self.driver.find_elements_by_xpath('//ul[@id="comment-list"]/li')
+                logging.info('current url -----------------> : %s' %
+                             self.driver.current_url)
+                comment_lis = self.driver.find_elements_by_xpath(
+                    '//ul[@id="comment-list"]/li')
                 for comment_li in comment_lis:
                     try:
                         item = CommentItem()
 
-                        row1_ps = comment_li.find_elements_by_xpath('.//div[@class="row-1"]/p')
+                        row1_ps = comment_li.find_elements_by_xpath(
+                            './/div[@class="row-1"]/p')
                         #  logging.info('len(row1_ps) -----------------> : %s' %
 
                         # disease name
                         try:
                             disease = str(
                                 row1_ps[0].find_element_by_xpath('.//span').text)
-                            disease = disease.replace('\n', '').replace('\t', '').replace(' ', '')
+                            disease = disease.replace('\n', '').replace(
+                                '\t', '').replace(' ', '')
                         except NoSuchElementException as e:
                             disease = '无'
                             logging.info(e)
@@ -169,21 +174,25 @@ class GuahaoSpider(scrapy.Spider):
 
                         # comment text
                         try:
-                            text = str(row2_divs[0].find_element_by_xpath('.//span[@class="detail"]').text)
+                            text = str(row2_divs[0].find_element_by_xpath(
+                                './/span[@class="detail"]').text)
                         except NoSuchElementException as e:
-                            text = str(row2_divs[0].find_element_by_xpath('.//span[@class="summary"]').text)
+                            text = str(row2_divs[0].find_element_by_xpath(
+                                './/span[@class="summary"]').text)
                         #  logging.info('text -----------------> : %s' % text)
 
                         # comment date
                         try:
-                            date = row2_divs[1].find_element_by_xpath('.//p/span[1]')
+                            date = row2_divs[1].find_element_by_xpath(
+                                './/p/span[1]')
                             date = str(date.text.split()[-1][1:-1])
                         except NoSuchElementException as e:
-                            date = ''
+                            date = '无'
 
                         # doctor
                         try:
-                            doctor = row2_divs[1].find_element_by_xpath('.//p/span[2]/a')
+                            doctor = row2_divs[1].find_element_by_xpath(
+                                './/p/span[2]/a')
                             doctor = str(doctor.text)
                         except NoSuchElementException as e:
                             doctor = '佚名'
@@ -205,14 +214,16 @@ class GuahaoSpider(scrapy.Spider):
                         logging.info('item: {}'.format(item))
                         continue
                 try:
-                    next_page = self.driver.find_element_by_xpath('//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
+                    next_page = self.driver.find_element_by_xpath(
+                        '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
                 except NoSuchElementException as e:
                     next_page = None
 
                 next_page.click()
                 time.sleep(0.30)
             except Exception as e:
-                logging.info('next page error -------------------> {}'.format(e))
+                logging.info(
+                    'next page error -------------------> {}'.format(e))
                 continue
 
         logging.info('len(items) -----------------> : %d' % len(items))

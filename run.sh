@@ -8,6 +8,7 @@
 
 
 mkdir -p data/
+mkdir -p data_raw/
 
 scrapy list
 scrapy crawl guahao
