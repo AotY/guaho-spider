@@ -10,6 +10,7 @@
 mkdir -p data/
 mkdir -p data_raw/
 
+git fetch
 git pull
 
 scrapy list

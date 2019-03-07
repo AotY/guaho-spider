@@ -240,19 +240,23 @@ class GuahaoSpider(scrapy.Spider):
             #  next_page.click()
             #  total_page_num = self.driver.find_element_by_xpath('//div[@class="grid-title"]/h3').text
             try:
-                #  sign = self.driver.find_element_by_xpath('//div[class="g-pagination-buttom"]/form[@class="qPagerForm"]/input[@name="sign"]')
                 sign = self.driver.find_element_by_xpath('//*[@id="g-cfg"]/div[3]/div/div/section/div[2]/div[1]/div/form/input[2]')
-                sign = sign.get_attribute('value')
-                logging.info('sign----------------------------------> : %s ' % sign)
-
-                # timestamp
-                #  timestamp = self.driver.find_element_by_xpath('//dvi[class="g-pagination-buttom"]/form[@class="qPagerForm"]/input[@name="timestamp"]')
-                timestamp = self.driver.find_element_by_xpath('//*[@id="g-cfg"]/div[3]/div/div/section/div[2]/div[1]/div/form/input[3]')
-                timestamp = timestamp.get_attribute('value')
-                logging.info('timestamp-----------------------------> : %s ' % timestamp)
             except NoSuchElementException as e:
-                print(e)
+                sign = self.driver.find_element_by_xpath('//form[@class="qPagerForm"]/input[2]')
+                #  print(e)
                 break
+            sign = sign.get_attribute('value')
+            logging.info('sign----------------------------------> : %s ' % sign)
+
+            try:
+                # timestamp
+                timestamp = self.driver.find_element_by_xpath('//*[@id="g-cfg"]/div[3]/div/div/section/div[2]/div[1]/div/form/input[3]')
+            except NoSuchElementException as e:
+                timestamp = self.driver.find_element_by_xpath('//form[@class="qPagerForm"]/input[3]')
+                #  print(e)
+                break
+            timestamp = timestamp.get_attribute('value')
+            logging.info('timestamp-----------------------------> : %s ' % timestamp)
 
             cur_url = self.driver.current_url
             if cur_url.find('pageNo') != -1:
