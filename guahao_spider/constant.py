@@ -12,8 +12,8 @@ Constant values
 class Constant:
     data_dir = './data_raw'
 
-    min_len = 3
-    max_len = 150
+    min_len = 1
+    max_len = 300
 
     loginId = '18786116312'
     password = '19940623tao'

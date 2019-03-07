@@ -117,15 +117,14 @@ class GuahaoSpider(scrapy.Spider):
     def parse_comment(self, response):
         #  if response.url.find('commentslist') == -1:
             #  yield scrapy.Request(url=response.url, cookies=self.driver.get_cookies(), callback=self.parse)
-        logging.info('parse_comment-----------> url: %s, code: %s' %
-                     (response.url, response.status))
+        logging.info('parse_comment---------------------------> url: %s, code: %s' % (response.url, response.status))
         # selenium get
         self.driver.get(response.url)
-        try:
-            next_page = self.driver.find_element_by_xpath(
-                '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
-        except NoSuchElementException as e:
-            next_page = None
+        #  try:
+            #  next_page = self.driver.find_element_by_xpath(
+                #  '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
+        #  except NoSuchElementException as e:
+            #  next_page = None
 
         items = list()
         try:
@@ -133,98 +132,123 @@ class GuahaoSpider(scrapy.Spider):
                 self.driver.find_element_by_xpath('//h1/strong/a').text)
             hospital_grade = str(
                 self.driver.find_element_by_xpath('//h1/span').text)
-            hospital_grade = hospital_grade.replace(
-                '\n', '').replace('\t', '').replace(' ', '')
+            hospital_grade = hospital_grade.replace('\n', '').replace('\t', '').replace(' ', '')
         except Exception as e:
             hospital_name = '无'
             hospital_grade = '无'
 
-        while next_page is not None:
-            try:
-                logging.info('current url -----------------> : %s' %
-                             self.driver.current_url)
-                comment_lis = self.driver.find_elements_by_xpath(
-                    '//ul[@id="comment-list"]/li')
-                for comment_li in comment_lis:
-                    try:
-                        item = CommentItem()
+        total_page_num = self.driver.find_element_by_xpath('//div[@class="grid-title"]/h3').text
+        total_page_num = total_page_num.split('（')[-1][:-1]
+        if total_page_num[-1] == '万':
+            total_page_num = float(total_page_num[:-1]) * 1000
+        else:
+            total_page_num = int(total_page_num)
+        total_page_num = total_page_num // 5 + 1
+        print('total_page_num -----------------------------------> %d' % total_page_num)
 
-                        row1_ps = comment_li.find_elements_by_xpath(
-                            './/div[@class="row-1"]/p')
-                        #  logging.info('len(row1_ps) -----------------> : %s' %
+        if total_page_num <= 0:
+            return None
 
-                        # disease name
-                        try:
-                            disease = str(
-                                row1_ps[0].find_element_by_xpath('.//span').text)
-                            disease = disease.replace('\n', '').replace(
-                                '\t', '').replace(' ', '')
-                        except NoSuchElementException as e:
-                            disease = '无'
-                            logging.info(e)
-                        #  logging.info('disease -----------------> : %s' % disease)
+        cur_page_num = 1
 
-                        # score
-                        score = str(len(row1_ps[1].find_elements_by_xpath(
-                            './/span[contains(@class, "giS-star-0")]')))
-                        #  logging.info('score -----------------> : %s' % score)
-
-                        row2_divs = comment_li.find_elements_by_xpath(
-                            './/div[@class="row-2"]/div')
-
-                        # comment text
-                        try:
-                            text = str(row2_divs[0].find_element_by_xpath(
-                                './/span[@class="detail"]').text)
-                        except NoSuchElementException as e:
-                            text = str(row2_divs[0].find_element_by_xpath(
-                                './/span[@class="summary"]').text)
-                        #  logging.info('text -----------------> : %s' % text)
-
-                        # comment date
-                        try:
-                            date = row2_divs[1].find_element_by_xpath(
-                                './/p/span[1]')
-                            date = str(date.text.split()[-1][1:-1])
-                        except NoSuchElementException as e:
-                            date = '无'
-
-                        # doctor
-                        try:
-                            doctor = row2_divs[1].find_element_by_xpath(
-                                './/p/span[2]/a')
-                            doctor = str(doctor.text)
-                        except NoSuchElementException as e:
-                            doctor = '佚名'
-                        #  logging.info('doctor -----------------> : %s' % doctor)
-
-                        item['hospital_name'] = hospital_name
-                        item['hospital_grade'] = hospital_grade
-
-                        item['disease'] = disease
-                        item['text'] = text
-                        item['score'] = score
-                        item['date'] = date
-                        item['doctor'] = doctor
-
-                        items.append(item)
-                    except Exception as e:
-                        logging.info(
-                            'item error -----------------------> {}'.format(e))
-                        logging.info('item: {}'.format(item))
-                        continue
+        while True:
+            if cur_page_num > total_page_num:
+                 break
+            comment_lis = self.driver.find_elements_by_xpath('//ul[@id="comment-list"]/li')
+            for comment_li in comment_lis:
                 try:
-                    next_page = self.driver.find_element_by_xpath(
-                        '//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
-                except NoSuchElementException as e:
-                    next_page = None
+                    item = CommentItem()
 
-                next_page.click()
-                time.sleep(0.30)
-            except Exception as e:
-                logging.info(
-                    'next page error -------------------> {}'.format(e))
-                continue
+                    row1_ps = comment_li.find_elements_by_xpath('.//div[@class="row-1"]/p')
+                    # disease name
+                    try:
+                        disease = str(
+                            row1_ps[0].find_element_by_xpath('.//span').text)
+                        disease = disease.replace('\n', '').replace('\t', '').replace(' ', '')
+                    except NoSuchElementException as e:
+                        disease = '无'
+                        logging.info(e)
+
+                    # score
+                    score = len(row1_ps[1].find_elements_by_xpath('.//span[contains(@class, "giS-star-0")]'))
+                    #  logging.info('score -----------------> : %s' % score)
+                    #  if score >= 4:
+                        #  print('score is %s' % score)
+                        #  continue
+
+                    row2_divs = comment_li.find_elements_by_xpath('.//div[@class="row-2"]/div')
+
+                    # comment text
+                    try:
+                        text = str(row2_divs[0].find_element_by_xpath('.//span[@class="detail"]').text)
+                    except NoSuchElementException as e:
+                        text = str(row2_divs[0].find_element_by_xpath('.//span[@class="summary"]').text)
+
+                    if len(text) <= 1:
+                        continue
+
+                    # comment date
+                    try:
+                        date = row2_divs[1].find_element_by_xpath('.//p/span[1]')
+                        date = str(date.text.split()[-1][1:-1])
+                    except NoSuchElementException as e:
+                        date = '无'
+
+                    # doctor
+                    try:
+                        doctor = row2_divs[1].find_element_by_xpath(
+                            './/p/span[2]/a')
+                        doctor = str(doctor.text)
+                    except NoSuchElementException as e:
+                        doctor = '佚名'
+
+                    item['hospital_name'] = hospital_name
+                    item['hospital_grade'] = hospital_grade
+
+                    item['disease'] = disease
+                    item['text'] = text
+                    item['score'] = score
+                    item['date'] = date
+                    item['doctor'] = doctor
+
+                    items.append(item)
+                except Exception as e:
+                    logging.info('item error -----------------------> {}'.format(e))
+                    logging.info('item: {}'.format(item))
+                    continue
+            #  try:
+                #  next_page = self.driver.find_element_by_xpath('//div[@class="g-pagination"]/div/form/div[@class="pagers"]/a[contains(@class, "next")]')
+            #  except NoSuchElementException as e:
+                #  next_page = None
+            #  next_page.click()
+            #  total_page_num = self.driver.find_element_by_xpath('//div[@class="grid-title"]/h3').text
+            try:
+                #  sign = self.driver.find_element_by_xpath('//div[class="g-pagination-buttom"]/form[@class="qPagerForm"]/input[@name="sign"]')
+                sign = self.driver.find_element_by_xpath('//*[@id="g-cfg"]/div[3]/div/div/section/div[2]/div[1]/div/form/input[2]')
+                sign = sign.get_attribute('value')
+                logging.info('sign----------------------------------> : %s ' % sign)
+
+                # timestamp
+                #  timestamp = self.driver.find_element_by_xpath('//dvi[class="g-pagination-buttom"]/form[@class="qPagerForm"]/input[@name="timestamp"]')
+                timestamp = self.driver.find_element_by_xpath('//*[@id="g-cfg"]/div[3]/div/div/section/div[2]/div[1]/div/form/input[3]')
+                timestamp = timestamp.get_attribute('value')
+                logging.info('timestamp-----------------------------> : %s ' % timestamp)
+            except NoSuchElementException as e:
+                print(e)
+                break
+
+            cur_url = self.driver.current_url
+            if cur_url.find('pageNo') != -1:
+                next_page_url = cur_url.split('pageNo')[0] + 'pageNo={}&sign={}&timestamp={}'.format(cur_page_num + 1, sign, timestamp)
+            else:
+                next_page_url = cur_url + '?pageNo={}&sign={}&timestamp={}'.format(cur_page_num + 1, sign, timestamp)
+
+            #  next_page_url = self.driver.current_url.split('pageNo')[0] + 'pageNo={}&sign={}&timestamp={}'.format(cur_page_num + 1, sign, timestamp)
+            logging.info('next url -----------------------------> : %s' % next_page_url)
+            self.driver.get(next_page_url)
+            time.sleep(0.35)
+
+            cur_page_num += 1
 
         logging.info('len(items) -----------------> : %d' % len(items))
         for item in items:
