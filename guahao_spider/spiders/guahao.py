@@ -3,6 +3,10 @@ import time
 import logging
 import scrapy
 
+import datetime
+#  import pandas as pd
+from pandas import to_datetime
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -126,7 +130,6 @@ class GuahaoSpider(scrapy.Spider):
         #  except NoSuchElementException as e:
             #  next_page = None
 
-        items = list()
         try:
             hospital_name = str(
                 self.driver.find_element_by_xpath('//h1/strong/a').text)
@@ -150,7 +153,10 @@ class GuahaoSpider(scrapy.Spider):
             return None
 
         cur_page_num = 1
+        items = list()
 
+        max_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        max_date = to_datetime(max_date)
         while True:
             if cur_page_num > total_page_num:
                  break
@@ -189,10 +195,18 @@ class GuahaoSpider(scrapy.Spider):
 
                     # comment date
                     try:
-                        date = row2_divs[1].find_element_by_xpath('.//p/span[1]')
-                        date = str(date.text.split()[-1][1:-1])
+                        date_str = row2_divs[1].find_element_by_xpath('.//p/span[1]').text
+                        comment_date = str(date_str.split()[-1][1:-1])
+
+                        cur_date = to_datetime(' '.join(date_str.split()[:2]))
+
+                        if cur_date > max_date:
+                            cur_page_num = float('inf')
+                            break
+                        else:
+                            max_date = cur_date
                     except NoSuchElementException as e:
-                        date = '无'
+                        comment_date = '无'
 
                     # doctor
                     try:
@@ -208,7 +222,7 @@ class GuahaoSpider(scrapy.Spider):
                     item['disease'] = disease
                     item['text'] = text
                     item['score'] = score
-                    item['date'] = date
+                    item['date'] = comment_date
                     item['doctor'] = doctor
 
                     items.append(item)
@@ -246,7 +260,7 @@ class GuahaoSpider(scrapy.Spider):
             #  next_page_url = self.driver.current_url.split('pageNo')[0] + 'pageNo={}&sign={}&timestamp={}'.format(cur_page_num + 1, sign, timestamp)
             logging.info('next url -----------------------------> : %s' % next_page_url)
             self.driver.get(next_page_url)
-            time.sleep(0.35)
+            time.sleep(0.28)
 
             cur_page_num += 1
 
