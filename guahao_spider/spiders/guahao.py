@@ -161,6 +161,9 @@ class GuahaoSpider(scrapy.Spider):
             if cur_page_num > total_page_num:
                  break
             comment_lis = self.driver.find_elements_by_xpath('//ul[@id="comment-list"]/li')
+            if len(comment_lis) < 5:
+                cur_page_num = float('inf')
+
             for comment_li in comment_lis:
                 try:
                     item = CommentItem()
@@ -260,7 +263,7 @@ class GuahaoSpider(scrapy.Spider):
             #  next_page_url = self.driver.current_url.split('pageNo')[0] + 'pageNo={}&sign={}&timestamp={}'.format(cur_page_num + 1, sign, timestamp)
             logging.info('next url -----------------------------> : %s' % next_page_url)
             self.driver.get(next_page_url)
-            time.sleep(0.28)
+            time.sleep(0.25)
 
             cur_page_num += 1
 
