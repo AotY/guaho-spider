@@ -10,5 +10,7 @@
 mkdir -p data/
 mkdir -p data_raw/
 
+git pull
+
 scrapy list
 scrapy crawl guahao
